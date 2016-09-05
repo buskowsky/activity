@@ -1,0 +1,9 @@
+
+.idea/uiDesigner.xml
+/target/
+/.idea/
+/lib/
+/bookstore.iml
+/activityapp.iml
+/database/hsqldb/bookstore-db.lck
+/database/hsqldb/bookstore-db.log

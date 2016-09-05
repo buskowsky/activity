@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="/WEB-INF/templates/template.xhtml"
+                xmlns:p="http://primefaces.org/ui" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:schemaLocation="http://java.sun.com/jsf/html ">
+
+
+    <ui:define name="content">
+        <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true"/>
+        <h:form id="form">
+            <p:panel id="menu">
+                <h:commandButton action="#{pageController.moveToActivity}" value="Activity"/>
+                <h:commandButton action="#{pageController.moveToCurrency}" value="Currency"/>
+                <h:commandButton action="#{pageController.moveToUser}" value="Users"/>
+            </p:panel>
+
+            <p:outputLabel value="Username:"/>
+            <p:inputText value="#{activityBackingBean.username}"/>
+
+            <p:outputLabel for="popup" value="Date:"/>
+            <p:calendar id="popup" value="#{activityBackingBean.date}" pattern="dd/MM/yyyy"/>
+
+            <p:outputLabel for="time" value="Time:"/>
+            <p:inputText id="time" maxlength="3" value="#{activityBackingBean.time}"/>
+
+            <p:commandButton id="saveActivity" value="Add activity"
+                             update="activityTable, form"
+                             actionListener="#{activityController.addActivity}"></p:commandButton>
+            <p:commandButton type="reset" value="Reset"/>
+            <p:commandButton value="changeText" actionListener="#{activityController.changeText}" update="text"/>
+        </h:form>
+        <p:panel styleClass="activityDataTableStyleClass">
+            <p:dataTable id="activityTable" var="act" rowKey="#{act.id}"
+                         value="#{activityBackingBean.activityTableModel}"
+                         paginator="true" rows="10">
+
+                <p:column sortBy="#{act.username}" headerText="username">
+                    <h:outputText value="#{act.username}"/>
+                </p:column>
+
+                <p:column sortBy="#{act.date}" headerText="date">
+                    <h:outputText value="#{act.date}">
+                        <f:convertDateTime pattern="dd-MM-yyyy" timeZone="Europe/Zurich"/>
+                    </h:outputText>
+                </p:column>
+
+                <p:column headerText="time">
+                    <h:outputText value="#{act.time}"/>
+                </p:column>
+
+                <p:column headerText="action">
+                    <p:commandButton id="removeActivity" value="Remove activity" update="activityTable"
+                                     actionListener="#{activityController.removeActivity}">
+                        <f:param name="id" value="#{act.id}"/>
+                    </p:commandButton>
+                </p:column>
+
+                <p:column style="width:6%" exportable="false">
+                </p:column>
+            </p:dataTable>
+            <p:panel>
+                <h:outputText id="text" value="#{activityBackingBean.text}"/>
+            </p:panel>
+        </p:panel>
+        <p:spacer height="20px"/>
+    </ui:define>
+</ui:composition>

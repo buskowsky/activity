@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="/WEB-INF/templates/template.xhtml"
+                xmlns:p="http://primefaces.org/ui" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:schemaLocation="http://java.sun.com/jsf/html ">
+
+    <ui:define name="menu">
+            <h:form id="form1">
+                <h:commandButton action="#{pageController.moveToUsers}" value="Users"/>
+                <h:commandButton action="#{pageController.moveToActivity}" value="Activity" />
+            </h:form>
+    </ui:define>
+</ui:composition>

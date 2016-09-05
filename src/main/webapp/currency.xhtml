@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="/WEB-INF/templates/template.xhtml"
+                xmlns:p="http://primefaces.org/ui" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:schemaLocation="http://java.sun.com/jsf/html ">
+
+    <ui:define name="content">
+        <h:form id="form">
+            <p:panel id="menu">
+                <h:commandButton action="#{pageController.moveToActivity}" value="Activity"/>
+                <h:commandButton action="#{pageController.moveToCurrency}" value="Currency"/>
+                <h:commandButton action="#{pageController.moveToUser}" value="Users"/>
+            </p:panel>
+            <p:panel styleClass="activityDataTableStyleClass">
+                <p:dataTable id="userTable" var="usr" rowKey="#{usr.id}"
+                             value="#{currencyBackingBean.currencyTableModel}"
+                             paginator="true" rows="10">
+
+                    <p:column sortBy="#{usr.name}" headerText="username">
+                        <h:outputText value="#{usr.name}"/>
+                    </p:column>
+
+                    <p:column sortBy="#{usr.usercurrency}" headerText="amount">
+                        <h:outputText value="#{usr.usercurrency}"/>
+                    </p:column>
+
+                    <p:column headerText="currency">
+                        <h:outputText value="#{usr.mon}"/>
+                    </p:column>
+
+                    <p:column style="width:6%" exportable="false">
+                    </p:column>
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+    </ui:define>
+</ui:composition>
